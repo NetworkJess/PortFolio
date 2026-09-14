@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study // ITAM & Telemetry Pipeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0e17;
+            --text-main: #fffffe;
+            --text-muted: #a7a9be;
+            --cyan: #00f0ff;
+            --magenta: #ff007f;
+            --purple: #7928ca;
+            --green: #00ff88;
+            --border-color: #2e2b44;
+            --card-bg: #161522;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .nav-back {
+            display: inline-block;
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .nav-back:hover { text-decoration: underline; }
+
+        header {
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--magenta);
+            padding-left: 1rem;
+        }
+
+        .prompt {
+            color: var(--cyan);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        h1 span { color: var(--cyan); }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+        }
+
+        section { margin-bottom: 2.5rem; }
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h2::before {
+            content: "# ";
+            color: var(--magenta);
+        }
+
+        .tui-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 4px;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .spec-item {
+            border-left: 2px solid var(--purple);
+            padding-left: 0.75rem;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        ul li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+        }
+
+        .code-block {
+            background: #09080e;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--green);
+            overflow-x: auto;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-back">&lt;-- RETURN_TO_SYSTEM_INDEX</a>
+
+    <header>
+        <div class="prompt">admin@sys-mgmt:~/case-studies# cat itam-telemetry-pipeline.md</div>
+        <h1>Automated ITAM & Incident Pipeline <span>//</span> Case Study</h1>
+        <div class="status-badge">[ITIL FRAMEWORK IMPLEMENTATION]</div>
+    </header>
+
+    <main>
+        <!-- Project Overview -->
+        <section>
+            <h2>01. Business Case & Objective</h2>
+            <div class="tui-box">
+                <p>As homelab server infrastructures grow, tracking physical hardware lifecycles, virtual storage allocations, and active service licenses quickly becomes unmanageable without enterprise tools.</p>
+                <p>This project implements an automated **IT Asset Management (ITAM)** and telemetry system. Combining self-hosted software inventory management with real-time uptime monitoring provides full visibility over local rack assets and automates proactive incident alerts.</p>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section>
+            <h2>02. Architecture & Tooling Stack</h2>
+            <div class="tui-box spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Asset Engine</div>
+                    <div class="spec-value">Snipe-IT (Docker LXC)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Telemetry & Alerting</div>
+                    <div class="spec-value">Uptime Kuma</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Host Infrastructure</div>
+                    <div class="spec-value">Fujitsu Primergy / Proxmox</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Notification Pipeline</div>
+                    <div class="spec-value">Discord Webhooks / Email</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Steps -->
+        <section>
+            <h2>03. Technical Implementation</h2>
+            <div class="tui-box">
+                <ul>
+                    <li><strong>Asset Cataloging:</strong> Deployed a containerized Snipe-IT stack with MySQL backend to log rack hardware, drives (ZFS pool members), switch port maps, and software licenses.</li>
+                    <li><strong>Telemetry Integration:</strong> Configured Uptime Kuma endpoints to ping critical web services, LXC IP addresses, and NAS shares every 60 seconds.</li>
+                    <li><strong>Automated Incident Routing:</strong> Linked Uptime Kuma event webhooks to trigger immediate notifications when service thresholds fail.</li>
+                </ul>
+
+                <div class="code-block">
+                    // Sample Webhook Payload Trigger (Telemetry Event)<br>
+                    {<br>
+                    &nbsp;&nbsp;"event": "service_down",<br>
+                    &nbsp;&nbsp;"asset_id": "LXC-PLX-01",<br>
+                    &nbsp;&nbsp;"host": "Fujitsu-RX300-S7",<br>
+                    &nbsp;&nbsp;"severity": "CRITICAL",<br>
+                    &nbsp;&nbsp;"timestamp": "2026-09-14T18:30:00Z"<br>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- ITIL & Management Alignment -->
+        <section>
+            <h2>04. ITIL Service Management Alignment</h2>
+            <div class="tui-box">
+                <ul>
+                    <li><strong>Service Asset & Configuration Management (SACM):</strong> Maintains accurate configuration items (CIs) and mappings between physical hardware and hosted LXC/Docker services.</li>
+                    <li><strong>Incident Management:</strong> Reduces Mean Time to Detect (MTTD) by automating failure alerts prior to end-user impact.</li>
+                    <li><strong>Proactive Maintenance:</strong> Enables preventative maintenance scheduling for physical server bays and drive replacements based on asset age and health telemetry.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Documentation compiled by Jessica Power. &copy; 2026.</p>
+    </footer>
+
+</body>
+</html>

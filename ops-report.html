@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ops Report // HomeLab-SecOps-Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0e17;
+            --text-main: #fffffe;
+            --text-muted: #a7a9be;
+            --cyan: #00f0ff;
+            --magenta: #ff007f;
+            --purple: #7928ca;
+            --green: #00ff88;
+            --border-color: #2e2b44;
+            --card-bg: #161522;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .nav-back {
+            display: inline-block;
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .nav-back:hover { text-decoration: underline; }
+
+        header {
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--magenta);
+            padding-left: 1rem;
+        }
+
+        .prompt {
+            color: var(--cyan);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        h1 span { color: var(--cyan); }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--green);
+            border: 1px solid var(--green);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+        }
+
+        section { margin-bottom: 2.5rem; }
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h2::before {
+            content: "# ";
+            color: var(--magenta);
+        }
+
+        .tui-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 4px;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .spec-item {
+            border-left: 2px solid var(--purple);
+            padding-left: 0.75rem;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .log-entry {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .log-entry:last-child { margin-bottom: 0; }
+        .log-entry .highlight { color: var(--magenta); }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        ul li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-back">&lt;-- RETURN_TO_SYSTEM_INDEX</a>
+
+    <header>
+        <div class="prompt">admin@sys-mgmt:~/ops-reports# cat homelab-secops-monitor.md</div>
+        <h1>System Ops Report <span>//</span> HomeLab Infrastructure</h1>
+        <div class="status-badge">[STATUS: ONLINE // HEALTH: 99.8%]</div>
+    </header>
+
+    <main>
+        <!-- Objective -->
+        <section>
+            <h2>01. Executive Summary & Objective</h2>
+            <div class="tui-box">
+                <p>The primary objective of this deployment was to engineer a localized, secure server environment to learn core networking, container orchestration, and self-hosted service administration on custom enterprise hardware.</p>
+            </div>
+        </section>
+
+        <!-- Hardware & Topology -->
+        <section>
+            <h2>02. Hardware & Rack Topology</h2>
+            <div class="tui-box spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Host Node</div>
+                    <div class="spec-value">Fujitsu Primergy RX300 S7</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Networking</div>
+                    <div class="spec-value">Managed Switch + Router Stack</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Storage Architecture</div>
+                    <div class="spec-value">TrueNAS VM (ZFS RAID)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Workstation Access</div>
+                    <div class="spec-value">Remote Desktop (Gaming Rig)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software Architecture -->
+        <section>
+            <h2>03. Stack Architecture & Deployment</h2>
+            <div class="tui-box">
+                <ul>
+                    <li><strong>Hypervisor Layer:</strong> Proxmox VE driving segmented workloads via LXC containers and VMs.</li>
+                    <li><strong>Storage & Media:</strong> TrueNAS VM managing ZFS arrays, feeding LXCs for Plex and automated media pipeline applications.</li>
+                    <li><strong>Containerization:</strong> Portainer managing isolated Docker stacks for backend services and VPN gateway routing.</li>
+                    <li><strong>Monitoring & Metrics:</strong> Uptime Kuma for service availability tracking and latency alerting (Grafana pipeline deployment in progress).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Problem Resolution -->
+        <section>
+            <h2>04. Engineering Case Study: Latency & Internal Routing</h2>
+            <div class="tui-box">
+                <div class="log-entry">
+                    <span class="highlight">[ISSUE DETECTED]:</span> High internal network latency spikes and throughput bottlenecks across local Docker service bridges during multi-client streaming.
+                </div>
+                <div class="log-entry">
+                    <span class="highlight">[ROOT CAUSE]:</span> Sub-optimal routing configurations across Virtual Subnets and unprioritized local traffic queues.
+                </div>
+                <div class="log-entry">
+                    <span class="highlight">[REMEDIATION]:</span> Reconfigured internal virtual network interfaces within Proxmox, optimized switch VLAN tagging, and streamlined container network bindings.
+                </div>
+                <div class="log-entry">
+                    <span class="highlight">[OUTCOME]:</span> Achieved steady-state low latency, optimized internal bandwidth distribution, and stabilized cross-service communication across all Docker stacks.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>End of report. &copy; 2026. <a href="index.html">Return to Portfolio</a></p>
+    </footer>
+
+</body>
+</html>

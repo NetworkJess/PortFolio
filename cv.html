@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae // Cyber TUI</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0e17;
+            --text-main: #fffffe;
+            --text-muted: #a7a9be;
+            --cyan: #00f0ff;
+            --magenta: #ff007f;
+            --purple: #7928ca;
+            --border-color: #2e2b44;
+            --card-bg: #161522;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-back {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-back:hover { text-decoration: underline; }
+
+        .actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn-action {
+            font-size: 0.8rem;
+            font-family: inherit;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+        }
+        .btn-outline:hover { background: rgba(0, 240, 255, 0.1); }
+
+        .btn-filled {
+            background: var(--cyan);
+            color: var(--bg-color);
+            border: 1px solid var(--cyan);
+            font-weight: 700;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--cyan);
+            padding-left: 1rem;
+        }
+
+        .prompt {
+            color: var(--cyan);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        h1 span { color: var(--magenta); }
+
+        .contact-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        section { margin-bottom: 2.5rem; }
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h2::before {
+            content: "> ";
+            color: var(--magenta);
+        }
+
+        .tui-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-title {
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .item-date {
+            color: var(--magenta);
+            font-size: 0.85rem;
+        }
+
+        .item-sub {
+            color: var(--cyan);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        ul:last-child { margin-bottom: 0; }
+
+        ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        ul li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-cat {
+            border-left: 2px solid var(--purple);
+            padding-left: 0.75rem;
+        }
+
+        .skill-cat-title {
+            font-size: 0.8rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-cat-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        @media print {
+            body::before { display: none; }
+            body { background: #fff; color: #000; }
+            .nav-header, footer { display: none; }
+            .tui-box { border: 1px solid #ccc; background: #fff; }
+            h1, h2, .item-title, .skill-cat-title { color: #000; }
+            .item-sub, .prompt, .nav-back { color: #333; }
+            ul li { color: #333; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-header">
+        <a href="index.html" class="nav-back">&lt;-- RETURN_TO_SYSTEM_INDEX</a>
+        <div class="actions">
+            <a href="Jessica CV.docx" download class="btn-action btn-filled">[DOWNLOAD CV]</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="prompt">admin@sys-mgmt:~$ cat Jessica_Power_CV.md</div>
+        <h1>Jessica Power <span>//</span> Curriculum Vitae</h1>
+        <div class="contact-info">
+            Co. Kilkenny | Phone: 083 451 8146 | Email: powerimmers@gmail.com
+        </div>
+    </header>
+
+    <main>
+        <!-- Education -->
+        <section>
+            <h2>01. Education & Academic Performance</h2>
+            <div class="tui-box">
+                <div class="item-header">
+                    <span class="item-title">B.Sc. in IT Management</span>
+                    <span class="item-date">2024 - Present</span>
+                </div>
+                <div class="item-sub">SETU Carlow | Academic Standing: Year 1 (2:1) | Year 2 (First Class Honours)</div>
+                <ul>
+                    <li>Focusing on IT infrastructure, enterprise management, networking, and system workflows.</li>
+                    <li>Hands-on application of self-hosted homelab setups to support coursework in network administration.</li>
+                </ul>
+
+                <div class="item-header" style="margin-top: 1.5rem;">
+                    <span class="item-title">Payroll, Manual & Computerised Accounts</span>
+                    <span class="item-date">Jan 2020 - Mar 2020</span>
+                </div>
+                <div class="item-sub">Waterford Institute of Technology</div>
+                <ul>
+                    <li>Practical training in financial accounting procedures and software systems.</li>
+                </ul>
+
+                <div class="item-header" style="margin-top: 1.5rem;">
+                    <span class="item-title">Certificate in Web Design & Development</span>
+                    <span class="item-date">Oct 2019 - Jan 2020</span>
+                </div>
+                <div class="item-sub">Griffith College Dublin</div>
+
+                <div class="item-header" style="margin-top: 1.5rem;">
+                    <span class="item-title">Second Level Education</span>
+                    <span class="item-date">2011 - 2016</span>
+                </div>
+                <div class="item-sub">Callan CSB, Callan, Co. Kilkenny</div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <h2>02. Employment History</h2>
+            <div class="tui-box">
+                <!-- Role 1 -->
+                <div class="item-header">
+                    <span class="item-title">Apprentice Mechanic</span>
+                    <span class="item-date">May 2021 - Jan 2024</span>
+                </div>
+                <div class="item-sub">Morrissey Motors – Peugeot Main Dealer</div>
+                <ul>
+                    <li>Diagnosed hardware, software, and electrical systems on modern vehicles alongside physical mechanical repairs.</li>
+                    <li>First 1st-year apprentice selected for major technical tasks (e.g., engine replacements) due to strict work standards, safety protocols, and keen attention to detail.</li>
+                    <li>Maintained an organized workstation to ensure workflow efficiency and completed specialized technical training with Peugeot.</li>
+                </ul>
+
+                <!-- Role 2 -->
+                <div class="item-header" style="margin-top: 1.5rem;">
+                    <span class="item-title">Sales & Main Desk Operations</span>
+                    <span class="item-date">Oct 2020 - May 2021</span>
+                </div>
+                <div class="item-sub">Electrocity, Kilkenny</div>
+                <ul>
+                    <li>Managed reception operations, multi-store stock audits, phone orders, and customer product consultations.</li>
+                    <li>Handled financial operations including daily till balancing, cash drops, and bank deposit preparations.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Core Skill Set -->
+        <section>
+            <h2>03. Competencies & Tech Stack</h2>
+            <div class="tui-box skills-grid">
+                <div class="skill-cat">
+                    <div class="skill-cat-title">IT & Systems</div>
+                    <div class="skill-cat-desc">IT Management, Homelab Infrastructure, Hardware & Systems Diagnostics, Sage Payroll</div>
+                </div>
+                <div class="skill-cat">
+                    <div class="skill-cat-title">Web & Accounting</div>
+                    <div class="skill-cat-desc">Web Design & Development, Computerised Accounts, Financial Operations</div>
+                </div>
+                <div class="skill-cat">
+                    <div class="skill-cat-title">Core Soft Skills</div>
+                    <div class="skill-cat-desc">Diagnostic Problem-Solving, Team Collaboration, Customer Relations, Numerical Accuracy</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>References available upon request. &copy; 2026 Jessica Power.</p>
+    </footer>
+
+</body>
+</html>
