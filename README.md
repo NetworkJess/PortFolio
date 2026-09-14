@@ -1,6 +1,6 @@
 # ⚡ IT Strategy & Systems Portfolio // Cyber TUI
 
-> **Live Demo:** [https://networkjess.github.io/portfolio](https://networkjess.github.io/portfolio)
+> **Live Demo:** [https://networkjess.github.io/PortFolio/](https://networkjess.github.io/PortFolio/)
 
 A lightweight, terminal-inspired (TUI / Cyber / Vaporwave) web portfolio engineered to showcase hands-on IT infrastructure, cloud administration, and enterprise IT management competencies.
 
