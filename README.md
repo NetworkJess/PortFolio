@@ -11,7 +11,7 @@ A lightweight, terminal-inspired (TUI / Cyber / Vaporwave) web portfolio enginee
 This repository contains a modular multi-page system design:
 
 * **`index.html`** — Primary control panel featuring system overview, core IT Management competencies, and project deployments.
-* **`cv.html`** — Curriculum Vitae detailing academic standing at SETU Carlow, technical background, and operations history[cite: 2].
+* **`cv.html`** — Curriculum Vitae detailing academic standing at SETU Carlow, technical background, and operations history.
 * **`ops-report.html`** — HomeLab SecOps operational write-up covering bare-metal Fujitsu rack topology, Proxmox hypervisor, TrueNAS ZFS storage, and network latency remediation.
 * **`itam-case-study.html`** — Enterprise IT Asset Management (ITAM) and telemetry pipeline case study mapping Snipe-IT and Uptime Kuma to ITIL frameworks.
 
@@ -37,9 +37,9 @@ This portfolio was architected using generative AI collaboration as a thought-pa
 
 ## 👤 Author & Contact
 
-**Jessica Power** — IT Management Student @ SETU Carlow[cite: 2]
-* **Location:** Co. Kilkenny, Ireland[cite: 2]
-* **Email:** [powerimmers@gmail.com](mailto:powerimmers@gmail.com)[cite: 2]
+**Jessica Power** — IT Management Student @ SETU Carlow
+* **Location:** Co. Kilkenny, Ireland
+* **Email:** [powerimmers@gmail.com](mailto:powerimmers@gmail.com)
 * **LinkedIn:** [https://www.linkedin.com/in/jessica-power-212915145/]
 
 ---
